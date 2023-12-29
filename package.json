@@ -4,12 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently --kill-others \"cd backend && pnpm dev\" \"cd frontend && pnpm dev\""
+    "dev": "docker-compose up -d && concurrently \"cd frontend && yarn dev\" \"cd backend && yarn develop\"",
+    "setup:frontend": "cd frontend && yarn",
+    "setup:backend": "cd backend && yarn",
+    "setup": "yarn install && yarn setup:frontend && yarn setup:backend",
+    "export": "cd backend && yarn strapi export --no-encrypt -f ../seed-data",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "husky": "^8.0.0"
   }
 }
