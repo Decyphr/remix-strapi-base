@@ -13,6 +13,7 @@
   "dependencies": {
     "@strapi/plugin-cloud": "4.16.2",
     "@strapi/plugin-i18n": "4.16.2",
+    "@strapi/plugin-seo": "^1.9.8",
     "@strapi/plugin-users-permissions": "4.16.2",
     "@strapi/strapi": "4.16.2",
     "better-sqlite3": "8.6.0",
@@ -20,6 +21,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
+    "strapi-plugin-slugify": "^2.3.8",
     "styled-components": "5.3.3"
   },
   "author": {
