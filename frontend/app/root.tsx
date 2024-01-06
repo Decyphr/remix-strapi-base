@@ -6,14 +6,31 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteError,
 } from "@remix-run/react";
 
 // tailwind styles
+import Header from "~/components/header";
+import { handleException } from "~/lib/exceptions";
 import styles from "./tailwind.css";
 
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: styles },
-];
+/* TODO: Configure Site Settings
+export async function loader() {
+  return { data: "TODO: Site Settings" };
+}
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  return [
+    { title: data?.homepage.seo.metaTitle ?? "Homepage" },
+    {
+      name: "description",
+      content: data?.homepage.seo.metaDescription ?? "",
+    },
+  ];
+}; 
+*/
+
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export default function App() {
   return (
@@ -25,10 +42,33 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <Header />
+        <main className="mt-14">
+          <Outlet />
+        </main>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  const message = handleException(error);
+
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <div>Error: {message}</div>
+        <Scripts />
       </body>
     </html>
   );

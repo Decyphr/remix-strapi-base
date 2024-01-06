@@ -1,27 +1,31 @@
 import { json, type MetaFunction } from "@remix-run/node";
+import qs from "qs";
+import HomepageHero from "~/components/homepage-hero";
 
-import strapi from "~/lib/strapi.server";
+import { getHomepage } from "~/lib/data.server";
 
-export const loader = async () => {
-  const { data: homepage } = await strapi.get("/api/homepage", {
-    params: {
-      populate: "seo",
-    },
+export async function loader() {
+  const query = qs.stringify({
+    populate: ["seo"],
   });
 
+  const homepage = await getHomepage(query);
+
   return json({ homepage });
-};
+}
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: data?.homepage.data.attributes.seo.metaTitle ?? "Homepage" },
+    { title: data?.homepage.seo.metaTitle ?? "Homepage" },
     {
       name: "description",
-      content: data?.homepage.data.attributes.seo.metaDescription,
+      content: data?.homepage.seo.metaDescription ?? "",
     },
   ];
 };
 
 export default function Index() {
-  return <div>Homepage</div>;
+  // const { homepage } = useLoaderData<typeof loader>();
+
+  return <HomepageHero />;
 }
