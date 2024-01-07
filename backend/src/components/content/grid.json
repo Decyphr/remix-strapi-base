@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_content_grids",
+  "info": {
+    "displayName": "grid",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "columns": {
+      "type": "enumeration",
+      "enum": [
+        "two",
+        "three",
+        "four"
+      ],
+      "default": "two",
+      "required": true
+    },
+    "gridColumn": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.rich-content",
+      "required": true,
+      "min": 2
+    }
+  }
+}

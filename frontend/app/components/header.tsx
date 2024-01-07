@@ -6,14 +6,18 @@ import { cn } from "~/lib/utils";
 export default function Header() {
   const navigation: { link: string; text: string }[] = [
     {
-      text: "Page One",
-      link: "/page-one",
+      text: "Blog",
+      link: "/blog",
+    },
+    {
+      text: "Sample Page",
+      link: "/sample-page",
     },
   ];
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-white">
-      <div className="container flex h-14 max-w-screen-2xl items-center">
+    <header className="fixed top-0 z-50 w-full bg-white shadow-sm">
+      <div className="container flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <Link to="/" className="mr-6 flex items-center space-x-2">
             <Icons.CaretDoubleRight className="h-4 w-4 text-primary" />

@@ -63,5 +63,6 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
     }
-  }
+  },
+  "css.customData": [".vscode/tailwind.json"]
 }

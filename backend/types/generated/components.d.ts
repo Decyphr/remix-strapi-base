@@ -1,5 +1,34 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ContentGrid extends Schema.Component {
+  collectionName: 'components_content_grids';
+  info: {
+    displayName: 'grid';
+    description: '';
+  };
+  attributes: {
+    columns: Attribute.Enumeration<['two', 'three', 'four']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'two'>;
+    gridColumn: Attribute.Component<'content.rich-content', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 2;
+      }>;
+  };
+}
+
+export interface ContentRichContent extends Schema.Component {
+  collectionName: 'components_content_rich_contents';
+  info: {
+    displayName: 'contentBlock';
+    description: '';
+  };
+  attributes: {
+    richContent: Attribute.Blocks & Attribute.Required;
+  };
+}
+
 export interface SharedMetaSocial extends Schema.Component {
   collectionName: 'components_shared_meta_socials';
   info: {
@@ -54,6 +83,8 @@ export interface SharedSeo extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'content.grid': ContentGrid;
+      'content.rich-content': ContentRichContent;
       'shared.meta-social': SharedMetaSocial;
       'shared.seo': SharedSeo;
     }

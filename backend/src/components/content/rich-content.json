@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_content_rich_contents",
+  "info": {
+    "displayName": "contentBlock",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "richContent": {
+      "type": "blocks",
+      "required": true
+    }
+  }
+}

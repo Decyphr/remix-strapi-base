@@ -16,10 +16,10 @@ export async function loader() {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: data?.homepage.seo.metaTitle ?? "Homepage" },
+    { title: data?.homepage.seo?.metaTitle ?? "Homepage" },
     {
       name: "description",
-      content: data?.homepage.seo.metaDescription ?? "",
+      content: data?.homepage.seo?.metaDescription ?? "",
     },
   ];
 };

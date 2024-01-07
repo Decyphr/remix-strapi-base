@@ -23,7 +23,10 @@ export default function HomepageHero() {
         <Link to="page-one" className={buttonVariants({ variant: "default" })}>
           Get Started
         </Link>
-        <Link to="/page-one" className={buttonVariants({ variant: "outline" })}>
+        <Link
+          to="/sample-page"
+          className={buttonVariants({ variant: "outline" })}
+        >
           View More
         </Link>
       </div>

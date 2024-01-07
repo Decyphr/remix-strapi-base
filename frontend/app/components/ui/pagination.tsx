@@ -79,6 +79,21 @@ const PaginationPrevious = ({
 );
 PaginationPrevious.displayName = "PaginationPrevious";
 
+const PaginationFirst = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label="Go to previous page"
+    className={cn("gap-1", className)}
+    {...props}
+  >
+    <Icons.CaretDoubleLeft className="h-4 w-4" />
+    <span className="sr-only">First Page</span>
+  </PaginationLink>
+);
+PaginationFirst.displayName = "PaginationFirst";
+
 const PaginationNext = ({
   className,
   ...props
@@ -92,6 +107,21 @@ const PaginationNext = ({
     <Icons.CaretRight className="h-4 w-4" />
   </PaginationLink>
 );
+
+const PaginationLast = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label="Go to next page"
+    className={cn("gap-1", className)}
+    {...props}
+  >
+    <span className="sr-only">Last Page</span>
+    <Icons.CaretDoubleRight className="h-4 w-4" />
+  </PaginationLink>
+);
+PaginationLast.displayName = "PaginationLast";
 
 const PaginationEllipsis = ({
   className,
@@ -111,7 +141,9 @@ export {
   Pagination,
   PaginationContent,
   PaginationEllipsis,
+  PaginationFirst,
   PaginationItem,
+  PaginationLast,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,

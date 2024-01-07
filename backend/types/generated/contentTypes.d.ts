@@ -807,44 +807,39 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginMenusMenu extends Schema.CollectionType {
-  collectionName: 'menus';
+export interface ApiArticleArticle extends Schema.CollectionType {
+  collectionName: 'articles';
   info: {
-    name: 'Menu';
-    displayName: 'Menu';
-    singularName: 'menu';
-    pluralName: 'menus';
-    tableName: 'menus';
+    singularName: 'article';
+    pluralName: 'articles';
+    displayName: 'Article';
+    description: '';
   };
   options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
+    draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    slug: Attribute.UID<'plugin::menus.menu', 'title'> & Attribute.Required;
-    items: Attribute.Relation<
-      'plugin::menus.menu',
-      'oneToMany',
-      'plugin::menus.menu-item'
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    description: Attribute.Text;
+    articleCategories: Attribute.Relation<
+      'api::article.article',
+      'manyToMany',
+      'api::article-category.article-category'
     >;
+    content: Attribute.DynamicZone<['content.grid', 'content.rich-content']>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::menus.menu',
+      'api::article.article',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::menus.menu',
+      'api::article.article',
       'oneToOne',
       'admin::user'
     > &
@@ -852,52 +847,34 @@ export interface PluginMenusMenu extends Schema.CollectionType {
   };
 }
 
-export interface PluginMenusMenuItem extends Schema.CollectionType {
-  collectionName: 'menu_items';
+export interface ApiArticleCategoryArticleCategory
+  extends Schema.CollectionType {
+  collectionName: 'article_categories';
   info: {
-    name: 'MenuItem';
-    displayName: 'Menu Item';
-    singularName: 'menu-item';
-    pluralName: 'menu-items';
-    tableName: 'menu_items';
+    singularName: 'article-category';
+    pluralName: 'article-categories';
+    displayName: 'articleCategory';
   };
   options: {
     draftAndPublish: false;
   };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
   attributes: {
-    order: Attribute.Integer;
-    title: Attribute.String & Attribute.Required;
-    url: Attribute.String;
-    target: Attribute.Enumeration<['_blank', '_parent', '_self', '_top']>;
-    root_menu: Attribute.Relation<
-      'plugin::menus.menu-item',
-      'manyToOne',
-      'plugin::menus.menu'
-    > &
-      Attribute.Required;
-    parent: Attribute.Relation<
-      'plugin::menus.menu-item',
-      'oneToOne',
-      'plugin::menus.menu-item'
+    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    articles: Attribute.Relation<
+      'api::article-category.article-category',
+      'manyToMany',
+      'api::article.article'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::menus.menu-item',
+      'api::article-category.article-category',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::menus.menu-item',
+      'api::article-category.article-category',
       'oneToOne',
       'admin::user'
     > &
@@ -951,6 +928,7 @@ export interface ApiPagePage extends Schema.CollectionType {
     title: Attribute.String & Attribute.Required & Attribute.Unique;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
     seo: Attribute.Component<'shared.seo'>;
+    content: Attribute.DynamicZone<['content.grid', 'content.rich-content']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -980,8 +958,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::menus.menu': PluginMenusMenu;
-      'plugin::menus.menu-item': PluginMenusMenuItem;
+      'api::article.article': ApiArticleArticle;
+      'api::article-category.article-category': ApiArticleCategoryArticleCategory;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::page.page': ApiPagePage;
     }

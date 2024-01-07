@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "docker-compose up -d && concurrently \"cd frontend && yarn dev\" \"cd backend && yarn develop\"",
+    "dev": "docker-compose up -d && concurrently \"cd backend && yarn develop\" \"cd frontend && yarn dev\"",
     "setup:frontend": "cd frontend && yarn",
     "setup:backend": "cd backend && yarn",
     "setup": "yarn install && yarn setup:frontend && yarn setup:backend",

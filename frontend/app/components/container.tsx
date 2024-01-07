@@ -7,5 +7,7 @@ export default function Container({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <div className={cn("container relative", className)}>{children}</div>;
+  return (
+    <div className={cn("container relative py-4", className)}>{children}</div>
+  );
 }

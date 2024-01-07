@@ -1022,6 +1022,11 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.6.1.tgz#9ab8f811930d7af3e3d549183a50884f9eb83f36"
   integrity sha512-UY+FGM/2jjMkzQLn8pxcHGMaVLh9aEitG3zY2CiY7XHdLiz3bZOwa6oDxNqEMv7zZkV+cj5DOdz0cQ1BP5Hjgw==
 
+"@strapi/blocks-react-renderer@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@strapi/blocks-react-renderer/-/blocks-react-renderer-1.0.0.tgz#6ca5d3c760f0c1847e291ec961e262c3695b2d3a"
+  integrity sha512-MwyjCOEGH7D9NWA1+ecApVKUx6bposzjKsPC9mebYrzaNuE6t/9hYH7rBb2ktMuPvMTjsyp9/RGfBKdKcnWC4g==
+
 "@testing-library/dom@^8.11.1":
   version "8.20.1"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-8.20.1.tgz#2e52a32e46fc88369eef7eef634ac2a192decd9f"

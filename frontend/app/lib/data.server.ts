@@ -1,6 +1,6 @@
 import strapi from "~/lib/strapi.server";
 
-import type { Homepage, Page, StrapiResponseMeta } from "~/types";
+import type { Article, Homepage, Page, StrapiResponseMeta } from "~/types";
 
 export function flattenAttributes(data: any): any {
   // Base case for recursion
@@ -43,21 +43,20 @@ export function flattenAttributes(data: any): any {
   return flattened;
 }
 
-export async function getEntryBySlug(
-  contentType: "page",
-  slug: string
+export async function getPageBySlug(
+  slug: string,
+  query?: string
 ): Promise<{
-  entry: Page;
+  page: Page;
   meta: StrapiResponseMeta;
 }> {
-  const { data } = await strapi.get(
-    `/api/slugify/slugs/${contentType}/${slug}`
-  );
+  const q = query ?? "";
+  const { data } = await strapi.get(`/api/slugify/slugs/page/${slug}?${q}`);
 
-  const entry = flattenAttributes(data.data);
+  const page = flattenAttributes(data.data);
 
   return {
-    entry,
+    page,
     meta: data.meta,
   };
 }
@@ -70,4 +69,36 @@ export async function getHomepage(query?: string): Promise<Homepage> {
   const homepage = flattenAttributes(data);
 
   return homepage;
+}
+
+export async function getArticles(query?: string): Promise<{
+  blogs: Article[];
+  meta: StrapiResponseMeta;
+}> {
+  const q = query ?? "";
+
+  const { data } = await strapi.get(`/api/articles?${q}`);
+
+  const blogs = flattenAttributes(data.data);
+
+  return { blogs, meta: data.meta };
+}
+
+export async function getArticleBySlug(
+  slug: string,
+  query?: string
+): Promise<{
+  blog: Article;
+  meta: StrapiResponseMeta;
+}> {
+  const q = query ?? "";
+
+  const { data } = await strapi.get(`/api/slugify/slugs/article/${slug}?${q}`);
+
+  const blog = flattenAttributes(data.data);
+
+  return {
+    blog,
+    meta: data.meta,
+  };
 }

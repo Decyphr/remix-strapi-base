@@ -1,3 +1,5 @@
+import type { BlocksContent } from "@strapi/blocks-react-renderer";
+
 export interface SEO {
   id: number;
   metaTitle: string;
@@ -69,14 +71,50 @@ export interface Homepage {
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
-  seo: SEO;
+  seo: SEO | null;
 }
 
 export interface Page {
   id: number;
   title: string;
   slug: string;
+  content: BlockContentComponent[];
+  seo: SEO | null;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
+}
+
+export interface Article {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  content: BlockContentComponent[];
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date;
+}
+
+/**
+ ** Block Content Types
+ */
+
+export type BlockContentComponentTypes =
+  | "content.rich-content"
+  | "content.grid";
+
+export interface BlockContentComponent {
+  id: number;
+  __component: BlockContentComponentTypes;
+}
+
+export interface RichContentBlock extends BlockContentComponent {
+  __component: "content.rich-content";
+  richContent: BlocksContent;
+}
+
+export interface GridContentBlock extends BlockContentComponent {
+  __component: "content.grid";
+  columns: "two" | "three" | "four";
 }
