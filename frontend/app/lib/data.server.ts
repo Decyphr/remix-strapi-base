@@ -43,6 +43,26 @@ export function flattenAttributes(data: any): any {
   return flattened;
 }
 
+export async function getSiteSettings(query?: string): Promise<any> {
+  const q = query ?? "";
+
+  const { data } = await strapi.get(`/api/site-setting?${q}`);
+
+  const settings = flattenAttributes(data.data);
+
+  return settings;
+}
+
+export async function getHomepage(query?: string): Promise<Homepage> {
+  const q = query ?? "";
+
+  const { data } = await strapi.get(`/api/homepage?${q}`);
+
+  const homepage = flattenAttributes(data);
+
+  return homepage;
+}
+
 export async function getPageBySlug(
   slug: string,
   query?: string
@@ -59,16 +79,6 @@ export async function getPageBySlug(
     page,
     meta: data.meta,
   };
-}
-
-export async function getHomepage(query?: string): Promise<Homepage> {
-  const q = query ?? "";
-
-  const { data } = await strapi.get(`/api/homepage?${q}`);
-
-  const homepage = flattenAttributes(data);
-
-  return homepage;
 }
 
 export async function getArticles(query?: string): Promise<{

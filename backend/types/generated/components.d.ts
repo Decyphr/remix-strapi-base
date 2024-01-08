@@ -66,7 +66,6 @@ export interface SharedSeo extends Schema.Component {
         maxLength: 60;
       }>;
     metaDescription: Attribute.String &
-      Attribute.Required &
       Attribute.SetMinMaxLength<{
         maxLength: 160;
       }>;

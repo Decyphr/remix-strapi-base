@@ -1,4 +1,3 @@
-import type { LinksFunction } from "@remix-run/node";
 import {
   Link,
   Links,
@@ -10,28 +9,30 @@ import {
   isRouteErrorResponse,
   useRouteError,
 } from "@remix-run/react";
+import qs from "qs";
 
 // tailwind styles
 import Container from "~/components/container";
 import Header from "~/components/header";
 import { buttonVariants } from "~/components/ui/button";
+
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
+
+import { getSiteSettings } from "~/lib/data.server";
 import styles from "./tailwind.css";
 
-/* TODO: Configure Site Settings
 export async function loader() {
-  return { data: "TODO: Site Settings" };
+  const query = qs.stringify({
+    populate: ["seo"],
+  });
+  const settings = await getSiteSettings(query);
+
+  return { settings };
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  return [
-    { title: data?.homepage.seo.metaTitle ?? "Homepage" },
-    {
-      name: "description",
-      content: data?.homepage.seo.metaDescription ?? "",
-    },
-  ];
-}; 
-*/
+  return [{ title: data?.settings.seo?.metaTitle ?? "Site Title" }];
+};
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
